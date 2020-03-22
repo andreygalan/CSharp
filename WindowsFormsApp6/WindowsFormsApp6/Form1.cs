@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -235,7 +235,6 @@ namespace WindowsFormsApp6
             string filename= openFileDialog1.FileName;
             string filetext = System.IO.File.ReadAllText(filename);
             V.Text = filetext;
-            int gtytyg = 123454;
         }
     }
 }
