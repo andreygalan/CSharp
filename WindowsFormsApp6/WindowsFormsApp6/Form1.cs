@@ -113,8 +113,7 @@ namespace WindowsFormsApp6
             private List<Vertex> listVertex;
             private List<Edge> listEdge;
             bool[] visited;
-
-
+            int[,] matr;
 
             public Graph()
             {
@@ -122,14 +121,13 @@ namespace WindowsFormsApp6
                 listEdge = new List<Edge>();
             }
 
-
             public void setupGraph(int[,] matrSm)
             {
                 // resize the vector to N elements of type vector<int>
                 int size = System.Convert.ToInt32(System.Math.Sqrt(matrSm.Length));
                 for (int i = 0; i < size; i++)
                     addVertex();
-
+                matr = matrSm;
                 // add edges to the undirected graph
                 for (int i = 0; i < size; i++)
                     for (int j = 0; j < size; j++)
@@ -161,9 +159,6 @@ namespace WindowsFormsApp6
 
                     }
             }
-
-
-
 
             public void AddEdge(Edge edge_to_add)
             {
@@ -213,28 +208,19 @@ namespace WindowsFormsApp6
                 return null;
             }
             public List<Vertex> printAllHamiltonianPaths(Vertex v, List<Vertex> path)
-            {
-                // if all the vertices are visited, then
-                // Hamiltonian path exists
+            {              
                 if (path.Count == listVertex.Count)
                 {
                     return path;
                 }
-
-
                 foreach (Vertex w in listVertex[v.getVertexid()].getAdjVertexList())
                 {
-                    // process only unvisited vertices as Hamiltonian
-                    // path visits each vertex exactly once
                     if (!visited[w.getVertexid()])
                     {
                         visited[w.getVertexid()] = true;
                         path.Add(w);
-
-
                         List<Vertex> newpath = printAllHamiltonianPaths(w, path);
                         if (newpath.Count == listVertex.Count) return path;
-
                         visited[w.getVertexid()] = false;
                         path.Remove(w);
                     }
@@ -242,7 +228,60 @@ namespace WindowsFormsApp6
                 return path;
             }
 
+            static int Determinant(int[,] arr)
+            {
+                int result = 0;
 
+                if (arr.Length == 1)
+                {
+                    return arr[0, 0];
+                }
+
+                for (int el = 0; el < arr.GetLength(1); el++)
+                {
+                    int[,] temp = new int[arr.GetLength(0) - 1, arr.GetLength(1) - 1];
+
+                    for (int i = 0; i < temp.GetLength(0); i++)
+                        for (int j = 0; j < temp.GetLength(1); j++)
+                        {
+                            temp[i, j] = (j < el) ? arr[i + 1, j] : arr[i + 1, j + 1];
+                        }
+
+                    int pow;
+                    if (el % 2 == 0) pow= 1;
+                    else
+                        pow=-1;
+                    result += (arr[0, el] * pow * Determinant(temp));
+                }
+                return result;
+            }         
+            public int ost()
+            {
+                double EPS = 1E-9;
+                int size = listVertex.Count;
+                int det = 1;
+                int[,] mkir = new int[size, size];
+                int[,] b = new int[size, size];
+          
+        
+                for (int i = 0; i < size; i++)
+                    for (int j = 0; j < size; j++)
+                        mkir[i,j] = 0;
+
+                for (int i = 0; i < size; i++)
+                    for (int j = 0; j < size; j++)
+                    {
+                        mkir[i,i] += matr[i, j];
+                        mkir[i,j] -= matr[i, j];
+                    }
+                int[,] algdopmkir = new int[size - 1, size - 1];
+                for (int i = 1; i < size; i++)
+                    for (int j = 1; j < size; j++)
+                        algdopmkir[i-1, j-1] = mkir[i, j];
+                det = Determinant(algdopmkir);             
+                return det;
+            }
+       
         }
 
         private void prV()
@@ -450,7 +489,7 @@ namespace WindowsFormsApp6
             string filename = openFileDialog1.FileName;
             string filetext = System.IO.File.ReadAllText(filename);
             V.Text = filetext;
-            int gtytyg = 123454;
+            
         }
         private Graph setGraph()
         {
@@ -485,23 +524,28 @@ namespace WindowsFormsApp6
 
             return G;
         }
-        private void hamilbutton_Click(object sender, EventArgs e)
+        
+        private void hamilbutton_Click_1(object sender, EventArgs e)
         {
             L.Clear();
 
-
-
             Graph G = setGraph();
             if (G == null) return;
-
-
-
-            // Поиск количества путей
             List<Vertex> res = G.startHamiltonianPaths();
             if (!(res == null))
                 foreach (Vertex i in res)
                     L.AppendText((i.getVertexid()).ToString());
             else L.AppendText("нет гам путей");
+        }
+
+        private void ostbutton_Click(object sender, EventArgs e)
+        {
+            L.Clear();
+
+            Graph G = setGraph();
+            if (G == null) return;
+            int n = G.ost();
+            L.AppendText(n.ToString());
         }
     }
 }

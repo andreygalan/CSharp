@@ -41,6 +41,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button3 = new System.Windows.Forms.Button();
+            this.hamilbutton = new System.Windows.Forms.Button();
+            this.ostbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // V
@@ -156,11 +158,33 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // hamilbutton
+            // 
+            this.hamilbutton.Location = new System.Drawing.Point(304, 100);
+            this.hamilbutton.Name = "hamilbutton";
+            this.hamilbutton.Size = new System.Drawing.Size(75, 23);
+            this.hamilbutton.TabIndex = 12;
+            this.hamilbutton.Text = "гамильтон";
+            this.hamilbutton.UseVisualStyleBackColor = true;
+            this.hamilbutton.Click += new System.EventHandler(this.hamilbutton_Click_1);
+            // 
+            // ostbutton
+            // 
+            this.ostbutton.Location = new System.Drawing.Point(304, 71);
+            this.ostbutton.Name = "ostbutton";
+            this.ostbutton.Size = new System.Drawing.Size(75, 23);
+            this.ostbutton.TabIndex = 13;
+            this.ostbutton.Text = "остов";
+            this.ostbutton.UseVisualStyleBackColor = true;
+            this.ostbutton.Click += new System.EventHandler(this.ostbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ostbutton);
+            this.Controls.Add(this.hamilbutton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
@@ -195,6 +219,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button hamilbutton;
+        private System.Windows.Forms.Button ostbutton;
     }
 }
 
