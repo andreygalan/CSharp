@@ -493,16 +493,16 @@ namespace WindowsFormsApp6
                 return false;
             }
 
-            public List<Edge> LargestEdgeCover()
+            public List<Edge> EdgeCover()
             {
                 listedgecover = new List<Edge>();
                 bool[] usedVertex = new bool[listVertex.Count];
-                FindLargestEdgeCover(usedVertex);
+                FindEdgeCover(usedVertex);
 
                 return listedgecover;
             }
             List<Edge> listedgecover;
-            public void FindLargestEdgeCover(bool[] usedVertex)
+            public void FindEdgeCover(bool[] usedVertex)
             {
                 Vertex vmindeg;
 
@@ -674,7 +674,7 @@ namespace WindowsFormsApp6
 
             Graph G = setGraph();
             if (G == null) return;
-            List<Edge> n = G.LargestEdgeCover();
+            List<Edge> n = G.EdgeCover();
             for(int i=0;i<n.Count;i++)
             {
                 L.AppendText("("+n[i].getsourceVertex().getVertexid().ToString()+","+ n[i].getstockVertex().getVertexid().ToString()+") ");

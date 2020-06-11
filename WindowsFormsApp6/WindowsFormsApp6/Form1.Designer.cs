@@ -86,7 +86,7 @@
             this.hamilbutton.Name = "hamilbutton";
             this.hamilbutton.Size = new System.Drawing.Size(239, 23);
             this.hamilbutton.TabIndex = 12;
-            this.hamilbutton.Text = "Гамильтонов путь";
+            this.hamilbutton.Text = "гамильтонов путь";
             this.hamilbutton.UseVisualStyleBackColor = true;
             this.hamilbutton.Click += new System.EventHandler(this.hamilbutton_Click_1);
             // 
@@ -126,7 +126,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(254, 23);
             this.button1.TabIndex = 16;
-            this.button1.Text = "наименьшее реберное покрытие";
+            this.button1.Text = "реберное покрытие";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -134,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 382);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.chrombutton);
